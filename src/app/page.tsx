@@ -19,7 +19,7 @@ export default function Home() {
 
           {/* Heading */}
           <h1 className="text-4xl sm:text-5xl font-bold mb-4">
-            你好，这里是冰雪奇缘工作室 <span className="wave">👋</span>
+            你好，这里是冰雪祁缘工作室 <span className="wave">👋</span>
           </h1>
 
           {/* Subtitle */}
@@ -41,7 +41,7 @@ export default function Home() {
               href="/blog"
               className="px-6 py-3 bg-accent text-background font-medium rounded-lg hover:bg-accent/90 transition-colors"
             >
-              观看赤石视频
+              观看视频
             </Link>
             <Link
               href="/projects"

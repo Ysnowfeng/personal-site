@@ -8,13 +8,13 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
-  title: "曾老师 | CTF大佬",
-  description: "热爱技术，喜欢分享CTF比赛心得",
-  keywords: ["全栈开发", "Web", "Pwn", "Reverse", "Misc", "Crypto"],
-  authors: [{ name: "曾老师" }],
+  title: "冰雪祁缘工作室 | 三热心理咨询室",
+  description: "热爱进行心理咨询，帮助无数正常家庭走出正常生活",
+  keywords: ["心理咨询", "关心", "温暖", "专业", "一流", "生活"],
+  authors: [{ name: "生于安徽" }],
   openGraph: {
-    title: "曾老师 | CTF大佬",
-    description: "热爱技术",
+    title: "冰雪祁缘工作室 | 三热心理咨询室",
+    description: "热爱抽象",
     type: "website",
     locale: "zh_CN",
   },
