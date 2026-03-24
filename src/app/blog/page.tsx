@@ -2,37 +2,53 @@ import Link from "next/link";
 
 const posts = [
   {
-    slug: "typescript-decorators",
-    title: "TypeScript 5.0 装饰器完全指南",
-    date: "2026-03-20",
-    excerpt: "深入解析 TC39 装饰器提案，探讨如何在现代 TypeScript 项目中优雅地使用装饰器模式。涵盖装饰器的基础语法、常见场景和最佳实践。",
-    tags: ["TypeScript", "装饰器"],
-    readingTime: "8 min",
+    slug: "gongzuoshi-gangyao",
+    title: "冰雪祁缘工作室公约（修订二）",
+    date: "2026-03-11",
+    excerpt: "本公约经工作室全员大会2025年12月12日通过，历经两次常务会议修改，明确工作室核心宗旨、组织架构、成员权利义务及各项纪律准则，为工作室发展提供根本遵循。",
+    tags: ["工作室公约", "规章制度"],
+    readingTime: "15 min",
   },
   {
-    slug: "microservices-architecture",
-    title: "从零打造高可用微服务架构",
-    date: "2026-03-15",
-    excerpt: "基于 NestJS + Docker + K8s 的微服务实战经验总结，涵盖服务发现、熔断降级、链路追踪等核心概念和实现方案。",
-    tags: ["架构", "微服务", "NestJS"],
+    slug: "gongzuoshi-fazhanlishi",
+    title: "冰雪祁缘工作室发展全历程",
+    date: "2025-11-11",
+    excerpt: "梳理工作室从2023年“三热”心理咨询室成立，历经多次更名、解散与重建，最终定名为冰雪祁缘工作室的完整发展脉络，记录关键节点与重大事件。",
+    tags: ["发展历史", "工作室沿革"],
     readingTime: "12 min",
   },
   {
-    slug: "nodejs-performance",
-    title: "Node.js 性能优化十大法则",
-    date: "2026-03-08",
-    excerpt: "结合实际项目经验，分享 V8 引擎、内存管理、异步 IO 等方面的优化技巧，让你的 Node.js 应用飞起来！",
-    tags: ["Node.js", "性能"],
+    slug: "yaoxuebao-jiang-setting",
+    title: "“姚雪豹”奖设立与评选规则",
+    date: "2025-12-12",
+    excerpt: "受“香农”奖启发设立的工作室专属荣誉，旨在表彰践行抽象精神表现突出的成员，本文详细介绍奖项设立背景、评选流程及首届奖项筹备细节。",
+    tags: ["荣誉表彰", "姚雪豹奖"],
+    readingTime: "8 min",
+  },
+  {
+    slug: "zuzhi-jiegou-yunxing",
+    title: "冰雪祁缘工作室组织架构与运行机制",
+    date: "2025-12-19",
+    excerpt: "详解工作室全员大会、常务会议及各类专项委员会的职责与权限，阐述民主集中制的议事原则，以及成员加入、转正、退出的完整流程规范。",
+    tags: ["组织架构", "运行机制"],
+    readingTime: "14 min",
+  },
+  {
+    slug: "xiaojiji-gongzuo-jilu",
+    title: "肃清消极怠工行为工作实施细则",
+    date: "2025-12-19",
+    excerpt: "针对小组大作业摸鱼行为泛滥问题，工作室成立专项非常委员会，本文明确消极怠工行为排查、认定、整改的全流程工作要求与实施标准。",
+    tags: ["纪律整治", "非常委员会"],
     readingTime: "10 min",
   },
   {
-    slug: "react-best-practices",
-    title: "React 最佳实践清单",
-    date: "2026-02-28",
-    excerpt: "总结多年 React 开发经验，涵盖组件设计、状态管理、性能优化、测试等方面的一些实用建议和避坑指南。",
-    tags: ["React", "最佳实践"],
-    readingTime: "15 min",
-  },
+    slug: "gongzuoshi-jilv-yaoQiu",
+    title: "冰雪祁缘工作室三大纪律核心要求",
+    date: "2025-12-12",
+    excerpt: "围绕语言纪律、财产纪律、保密纪律三大核心，明确工作室成员的行为红线与沟通准则，保障工作室内部和谐稳定与信息安全。",
+    tags: ["工作室纪律", "行为准则"],
+    readingTime: "7 min",
+  }
 ];
 
 export default function Blog() {
@@ -41,9 +57,9 @@ export default function Blog() {
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <section className="mb-16">
-          <h1 className="text-3xl sm:text-4xl font-bold mb-4">博客</h1>
+          <h1 className="text-3xl sm:text-4xl font-bold mb-4">工作室专栏</h1>
           <p className="text-muted-foreground text-lg">
-            记录技术心得，分享成长历程 📝
+            记录工作室发展，梳理规章制度 📝
           </p>
           <div className="h-1 w-20 bg-accent rounded mt-4" />
         </section>
@@ -94,7 +110,7 @@ export default function Blog() {
         {/* Empty state hint */}
         <div className="mt-12 text-center py-12 border border-dashed border-border rounded-xl">
           <p className="text-muted-foreground">
-            更多文章正在路上... 🚧
+            更多工作室内容正在整理... 🚧
           </p>
         </div>
       </div>

@@ -13,7 +13,7 @@ export default function About() {
         {/* Bio */}
         <section className="mb-16">
           <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-            你好！冰雪祁缘工作室是在中国共产党的领导下，研究抽象行为和精神内涵的试验性组织，核心宗旨为抽象，秉持平等与团结的核心理念，于2025年11月11日完成重建，是由多方成员凝聚而成的集体组织。
+            你好！冰雪祁缘工作室是研究抽象行为和精神内涵的试验性组织，核心宗旨为抽象，秉持平等与团结的核心理念，于2025年11月11日完成重建，是由多方成员凝聚而成的集体组织。
           </p>
           <p className="text-lg text-muted-foreground leading-relaxed mb-6">
             我们以抽象精神为指引，打破常规思维桎梏、以独特视角洞察事物本质，将抽象理念与具体实践结合，在各自领域勇于探索，主动践行社会责任，为国家建设贡献自身力量，实现个人价值与社会价值的统一。
@@ -26,7 +26,7 @@ export default function About() {
         {/* Studio Connotation */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold mb-6">
-            <span className="text-accent">##</span> 工作室核心内涵
+            <span className="text-accent"></span> 工作室核心内涵
           </h2>
           
           <div className="space-y-8">
@@ -63,7 +63,7 @@ export default function About() {
         {/* Timeline */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold mb-6">
-            <span className="text-accent">##</span> 发展历程
+            <span className="text-accent"></span> 发展历程
           </h2>
           
           <div className="space-y-8 border-l-2 border-border pl-8">
