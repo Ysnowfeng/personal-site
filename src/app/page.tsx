@@ -19,19 +19,19 @@ export default function Home() {
 
           {/* Heading */}
           <h1 className="text-4xl sm:text-5xl font-bold mb-4">
-            你好，我是小增 <span className="wave">👋</span>
+            你好，我是曾老师 <span className="wave">👋</span>
           </h1>
 
           {/* Subtitle */}
           <p className="text-xl sm:text-2xl text-accent font-medium mb-6">
-            全栈开发者 & 技术写作者
+            全栈开发者 & CTFer
           </p>
 
           {/* Bio */}
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed">
-            热爱 <span className="text-accent-purple font-medium">Node.js</span> 和{" "}
-            <span className="text-accent-purple font-medium">TypeScript</span>，
-            专注于构建优雅的 Web 应用。喜欢分享技术心得，坚信{" "}
+            热爱 <span className="text-accent-purple font-medium">CTF</span> 和{" "}
+            <span className="text-accent-purple font-medium">艺术</span>
+          喜欢分享技术心得，坚信{" "}
             <span className="text-accent-purple font-medium">代码即艺术</span>。
           </p>
 

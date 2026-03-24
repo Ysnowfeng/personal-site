@@ -32,7 +32,7 @@ export default function Contact() {
         {/* Contact Methods */}
         <div className="grid sm:grid-cols-3 gap-6 mb-12">
           {[
-            { icon: "📧", label: "邮箱", value: "xiaozeng@example.com" },
+            { icon: "📧", label: "邮箱", value: "xiaozeng@qq.com" },
             { icon: "🐙", label: "GitHub", value: "github.com/xiaozeng" },
             { icon: "🐦", label: "Twitter", value: "@xiaozeng" },
           ].map((item) => (
