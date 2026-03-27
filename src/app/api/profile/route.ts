@@ -23,7 +23,7 @@ export async function GET() {
     }
     
     return NextResponse.json(profile);
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "获取资料失败" }, { status: 500 });
   }
 }
@@ -34,7 +34,7 @@ export async function POST(request: Request) {
     const data = await request.json();
     
     // Get existing profile or create new
-    let profile = await Profile.findOne();
+    const profile = await Profile.findOne();
     
     if (profile) {
       await Profile.findByIdAndUpdate(profile._id, { ...data, updatedAt: new Date() });
@@ -43,7 +43,7 @@ export async function POST(request: Request) {
     }
     
     return NextResponse.json({ success: true, message: "保存成功" });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "保存失败" }, { status: 500 });
   }
 }

@@ -110,7 +110,7 @@ export default function AdminProjects() {
       setMessage("保存成功！");
       setShowForm(false);
       loadProjects();
-    } catch (error) {
+    } catch {
       setMessage("保存失败");
     } finally {
       setSaving(false);

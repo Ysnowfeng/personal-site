@@ -7,10 +7,21 @@ import { Admin } from "@/models/Admin";
 
 const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key-change-this";
 
+interface AuthRequestBody {
+  username: string;
+  password: string;
+  action?: "login" | "register";
+}
+
+interface AuthTokenPayload extends jwt.JwtPayload {
+  id: string;
+  username: string;
+}
+
 export async function POST(request: NextRequest) {
   try {
     await connectDB();
-    const { username, password, action } = await request.json();
+    const { username, password, action } = (await request.json()) as AuthRequestBody;
 
     // Register (first time only)
     if (action === "register") {
@@ -60,7 +71,7 @@ export async function GET() {
       return NextResponse.json({ authenticated: false });
     }
 
-    const decoded = jwt.verify(token, JWT_SECRET) as any;
+    const decoded = jwt.verify(token, JWT_SECRET) as AuthTokenPayload;
     return NextResponse.json({ authenticated: true, username: decoded.username });
   } catch {
     return NextResponse.json({ authenticated: false });

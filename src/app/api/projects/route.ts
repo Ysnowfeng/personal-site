@@ -7,7 +7,7 @@ export async function GET() {
     await connectDB();
     const projects = await Project.find().sort({ order: 1, createdAt: -1 });
     return NextResponse.json(projects);
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "获取项目失败" }, { status: 500 });
   }
 }
@@ -24,7 +24,7 @@ export async function POST(request: Request) {
       await Project.create(data);
       return NextResponse.json({ success: true, message: "创建成功" });
     }
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "操作失败" }, { status: 500 });
   }
 }
@@ -41,7 +41,7 @@ export async function DELETE(request: Request) {
     
     await Project.findByIdAndDelete(id);
     return NextResponse.json({ success: true, message: "删除成功" });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "删除失败" }, { status: 500 });
   }
 }

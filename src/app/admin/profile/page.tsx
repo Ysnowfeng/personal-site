@@ -73,7 +73,7 @@ export default function AdminProfile() {
       }
 
       setMessage("保存成功！");
-    } catch (error) {
+    } catch {
       setMessage("保存失败");
     } finally {
       setSaving(false);

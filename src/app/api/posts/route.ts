@@ -2,13 +2,17 @@ import { NextResponse } from "next/server";
 import connectDB from "@/lib/db";
 import { Post } from "@/models/Post";
 
+function isDuplicateKeyError(error: unknown): error is { code: number } {
+  return typeof error === "object" && error !== null && "code" in error && typeof error.code === "number";
+}
+
 // GET all posts
 export async function GET() {
   try {
     await connectDB();
     const posts = await Post.find().sort({ date: -1 });
     return NextResponse.json(posts);
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "获取文章失败" }, { status: 500 });
   }
 }
@@ -28,8 +32,8 @@ export async function POST(request: Request) {
       await Post.create(data);
       return NextResponse.json({ success: true, message: "创建成功" });
     }
-  } catch (error: any) {
-    if (error.code === 11000) {
+  } catch (error) {
+    if (isDuplicateKeyError(error) && error.code === 11000) {
       return NextResponse.json({ error: "Slug 已存在" }, { status: 400 });
     }
     return NextResponse.json({ error: "操作失败" }, { status: 500 });
@@ -49,7 +53,7 @@ export async function DELETE(request: Request) {
     
     await Post.findByIdAndDelete(id);
     return NextResponse.json({ success: true, message: "删除成功" });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "删除失败" }, { status: 500 });
   }
 }

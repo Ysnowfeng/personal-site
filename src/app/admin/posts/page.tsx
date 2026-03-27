@@ -111,7 +111,7 @@ export default function AdminPosts() {
       setMessage("保存成功！");
       setShowForm(false);
       loadPosts();
-    } catch (error) {
+    } catch {
       setMessage("保存失败");
     } finally {
       setSaving(false);

@@ -1,37 +1,208 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-  --muted: #3a3a3a;
-  --muted-foreground: #8a8a8a;
-  --accent: #58a6ff;
-  --accent-green: #3fb950;
-  --accent-purple: #a371f7;
-  --border: #30363d;
+  --background: #07111f;
+  --background-deep: #040a13;
+  --foreground: #eff5ff;
+  --surface: #10223c;
+  --surface-strong: #163152;
+  --muted: #1c314b;
+  --muted-foreground: #9bb0ca;
+  --accent: #8fd3ff;
+  --accent-deep: #59b5ff;
+  --accent-gold: #f3c76b;
+  --accent-green: #98dfc3;
+  --border: rgba(157, 179, 209, 0.18);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-strong: var(--surface-strong);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
+  --color-accent-deep: var(--accent-deep);
+  --color-accent-gold: var(--accent-gold);
   --color-accent-green: var(--accent-green);
-  --color-accent-purple: var(--accent-purple);
   --color-border: var(--border);
 }
 
 * {
-  @apply border-border;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  @apply bg-background text-foreground;
+  background:
+    radial-gradient(circle at top left, rgba(243, 199, 107, 0.18), transparent 26%),
+    radial-gradient(circle at top right, rgba(143, 211, 255, 0.18), transparent 32%),
+    radial-gradient(circle at 50% 20%, rgba(89, 181, 255, 0.1), transparent 30%),
+    linear-gradient(180deg, var(--background) 0%, #091425 42%, var(--background-deep) 100%);
+  color: var(--foreground);
+  font-family: var(--font-sans-sc), sans-serif;
   font-feature-settings: "rlig" 1, "calt" 1;
+  position: relative;
 }
 
-/* Scrollbar */
+body::before {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(180deg, rgba(255, 255, 255, 0.48), transparent 85%);
+  z-index: -2;
+}
+
+a {
+  color: inherit;
+}
+
+.font-display {
+  font-family: var(--font-serif-sc), serif;
+}
+
+.site-shell {
+  margin-inline: auto;
+  max-width: 76rem;
+  padding-inline: 1rem;
+}
+
+.page-shell {
+  padding-block: 7rem 5rem;
+}
+
+.hero-card,
+.glass-card {
+  border: 1px solid var(--border);
+  background: linear-gradient(145deg, rgba(17, 35, 58, 0.92), rgba(8, 17, 31, 0.96));
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(18px);
+}
+
+.hero-card {
+  border-radius: 2rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-card::after {
+  content: "";
+  position: absolute;
+  inset: auto -12% -20% auto;
+  width: 18rem;
+  height: 18rem;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(243, 199, 107, 0.28), transparent 72%);
+  pointer-events: none;
+}
+
+.glass-card {
+  border-radius: 1.5rem;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid rgba(143, 211, 255, 0.22);
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 999px;
+  padding: 0.4rem 0.85rem;
+  color: var(--accent);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.section-title {
+  font-family: var(--font-serif-sc), serif;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  line-height: 1.15;
+  color: var(--foreground);
+}
+
+.lead {
+  color: var(--muted-foreground);
+  font-size: 1.03rem;
+  line-height: 1.9;
+}
+
+.metric-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.5rem;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  padding: 1.25rem;
+}
+
+.metric-value {
+  font-family: var(--font-serif-sc), serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1;
+  color: var(--accent-gold);
+}
+
+.tag-pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.45rem 0.8rem;
+  font-size: 0.82rem;
+  color: var(--foreground);
+}
+
+.timeline-rail {
+  position: relative;
+}
+
+.timeline-rail::before {
+  content: "";
+  position: absolute;
+  left: 0.8rem;
+  top: 0.2rem;
+  bottom: 0.2rem;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(243, 199, 107, 0.4), rgba(143, 211, 255, 0.12));
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 2.75rem;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: 0.4rem;
+  top: 0.35rem;
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent-gold), var(--accent));
+  box-shadow: 0 0 0 4px rgba(7, 17, 31, 0.95);
+}
+
+.rich-copy p {
+  color: var(--muted-foreground);
+  line-height: 1.95;
+}
+
+.rich-copy p + p {
+  margin-top: 1rem;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -41,7 +212,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--muted);
+  background: rgba(155, 176, 202, 0.35);
   border-radius: 4px;
 }
 
@@ -49,12 +220,10 @@ body {
   background: var(--muted-foreground);
 }
 
-/* Selection */
 ::selection {
-  background: rgba(88, 166, 255, 0.3);
+  background: rgba(143, 211, 255, 0.3);
 }
 
-/* Animation classes */
 .animate-fade-in {
   animation: fadeIn 0.5s ease-out forwards;
 }
@@ -68,35 +237,49 @@ body {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideUp {
-  from { 
+  from {
     opacity: 0;
     transform: translateY(20px);
   }
-  to { 
+
+  to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
 @keyframes bounceSubtle {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
-/* Wave animation for emoji */
-.wave {
-  animation: wave 1.5s ease-in-out infinite;
-  display: inline-block;
-  transform-origin: 70% 70%;
-}
+@media (max-width: 640px) {
+  .page-shell {
+    padding-block: 6rem 4rem;
+  }
 
-@keyframes wave {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(20deg); }
-  75% { transform: rotate(-20deg); }
+  .hero-card {
+    border-radius: 1.5rem;
+  }
+
+  .glass-card,
+  .metric-card {
+    border-radius: 1.25rem;
+  }
 }

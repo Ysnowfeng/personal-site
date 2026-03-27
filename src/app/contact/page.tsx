@@ -1,123 +1,151 @@
 "use client";
 
 import { useState } from "react";
+import { contactPrinciples, contactTopics, studioProfile } from "@/data/studio";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [feedback, setFeedback] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setStatus("sending");
-    
-    // 模拟发送
-    setTimeout(() => {
+    setFeedback("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data = (await response.json()) as { message?: string; error?: string };
+
+      if (!response.ok) {
+        setStatus("error");
+        setFeedback(data.error || "提交失败，请稍后重试。");
+        return;
+      }
+
       setStatus("success");
+      setFeedback(data.message || "消息已收到。");
       setForm({ name: "", email: "", message: "" });
-    }, 1500);
+    } catch {
+      setStatus("error");
+      setFeedback("提交失败，请检查网络后重试。");
+    }
   };
 
   return (
-    <div className="pt-24 pb-16 px-4">
-      <div className="max-w-2xl mx-auto">
-        {/* Header */}
-        <section className="mb-16 text-center">
-          <h1 className="text-3xl sm:text-4xl font-bold mb-4">联系我</h1>
-          <p className="text-muted-foreground text-lg">
-            有想法？合作？或者只是想聊聊技术？ 👇
-          </p>
-          <div className="h-1 w-20 bg-accent rounded mx-auto mt-4" />
+    <div className="page-shell">
+      <div className="site-shell space-y-8">
+        <section className="hero-card px-6 py-8 sm:px-8 sm:py-10 lg:px-10">
+          <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+            <div>
+              <p className="eyebrow">Contact & Coordination</p>
+              <h1 className="font-display mt-4 text-4xl leading-tight text-foreground sm:text-5xl">
+                站内联络页也遵循同一套制度边界。
+              </h1>
+              <p className="lead mt-6 max-w-3xl">
+                联系页不再沿用个人博客式的自我介绍口吻，而是作为 {studioProfile.name}
+                的公开联络入口，用于接收制度修订建议、室史补录和文告协作请求。
+              </p>
+            </div>
+
+            <div className="glass-card p-6">
+              <p className="text-sm uppercase tracking-[0.28em] text-accent-gold">联络原则</p>
+              <div className="mt-5 space-y-4">
+                {contactPrinciples.map((principle) => (
+                  <p key={principle} className="text-sm leading-7 text-muted-foreground">
+                    {principle}
+                  </p>
+                ))}
+              </div>
+            </div>
+          </div>
         </section>
 
-        {/* Contact Methods */}
-        <div className="grid sm:grid-cols-3 gap-6 mb-12">
-          {[
-            { icon: "📧", label: "邮箱", value: "xiaozeng@qq.com" },
-            { icon: "🐙", label: "GitHub", value: "github.com/xiaozeng" },
-            { icon: "🐦", label: "Twitter", value: "@xiaozeng" },
-          ].map((item) => (
-            <div
-              key={item.label}
-              className="p-6 bg-muted/30 border border-border rounded-xl text-center hover:border-accent transition-colors"
-            >
-              <span className="text-3xl mb-3 block">{item.icon}</span>
-              <p className="text-sm text-muted-foreground mb-1">{item.label}</p>
-              <p className="font-medium truncate">{item.value}</p>
+        <section className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+          <article className="glass-card p-6 sm:p-8">
+            <p className="eyebrow">联络议题</p>
+            <h2 className="section-title mt-4">欢迎围绕以下事项来信</h2>
+            <div className="mt-8 space-y-4">
+              {contactTopics.map((topic) => (
+                <article key={topic.title} className="rounded-[1.5rem] border border-white/10 bg-white/4 p-5">
+                  <h3 className="text-xl font-semibold text-foreground">{topic.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-muted-foreground">{topic.description}</p>
+                </article>
+              ))}
             </div>
-          ))}
-        </div>
+          </article>
 
-        {/* Contact Form */}
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium mb-2">
-              姓名
-            </label>
-            <input
-              type="text"
-              id="name"
-              value={form.name}
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
-              className="w-full px-4 py-3 bg-muted/30 border border-border rounded-lg focus:outline-none focus:border-accent transition-colors"
-              placeholder="你的名字"
-              required
-            />
-          </div>
+          <article className="glass-card p-6 sm:p-8">
+            <p className="eyebrow">发送留言</p>
+            <h2 className="section-title mt-4">留下可回联方式与具体事项</h2>
 
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium mb-2">
-              邮箱
-            </label>
-            <input
-              type="email"
-              id="email"
-              value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
-              className="w-full px-4 py-3 bg-muted/30 border border-border rounded-lg focus:outline-none focus:border-accent transition-colors"
-              placeholder="your@email.com"
-              required
-            />
-          </div>
+            <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+              <div>
+                <label htmlFor="name" className="mb-2 block text-sm text-muted-foreground">
+                  称呼
+                </label>
+                <input
+                  id="name"
+                  type="text"
+                  value={form.name}
+                  onChange={(event) => setForm({ ...form, name: event.target.value })}
+                  className="w-full rounded-[1.2rem] border border-white/10 bg-white/5 px-4 py-3 text-foreground outline-none transition-colors placeholder:text-muted-foreground/70 focus:border-accent"
+                  placeholder="例如：制度整理人 / 室史补录者"
+                  required
+                />
+              </div>
 
-          <div>
-            <label htmlFor="message" className="block text-sm font-medium mb-2">
-              留言
-            </label>
-            <textarea
-              id="message"
-              value={form.message}
-              onChange={(e) => setForm({ ...form, message: e.target.value })}
-              rows={5}
-              className="w-full px-4 py-3 bg-muted/30 border border-border rounded-lg focus:outline-none focus:border-accent transition-colors resize-none"
-              placeholder="想和我说点什么..."
-              required
-            />
-          </div>
+              <div>
+                <label htmlFor="email" className="mb-2 block text-sm text-muted-foreground">
+                  回联邮箱
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  value={form.email}
+                  onChange={(event) => setForm({ ...form, email: event.target.value })}
+                  className="w-full rounded-[1.2rem] border border-white/10 bg-white/5 px-4 py-3 text-foreground outline-none transition-colors placeholder:text-muted-foreground/70 focus:border-accent"
+                  placeholder="name@example.com"
+                  required
+                />
+              </div>
 
-          <button
-            type="submit"
-            disabled={status === "sending"}
-            className="w-full py-3 bg-accent text-background font-medium rounded-lg hover:bg-accent/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {status === "sending" ? "发送中..." : status === "success" ? "已发送 ✓" : "发送消息"}
-          </button>
+              <div>
+                <label htmlFor="message" className="mb-2 block text-sm text-muted-foreground">
+                  具体内容
+                </label>
+                <textarea
+                  id="message"
+                  value={form.message}
+                  onChange={(event) => setForm({ ...form, message: event.target.value })}
+                  rows={7}
+                  className="w-full resize-none rounded-[1.2rem] border border-white/10 bg-white/5 px-4 py-3 text-foreground outline-none transition-colors placeholder:text-muted-foreground/70 focus:border-accent"
+                  placeholder="请写明涉及的制度条目、历史节点或协作事项。"
+                  required
+                />
+              </div>
 
-          {status === "success" && (
-            <p className="text-center text-accent-green">
-              消息已发送，我会尽快回复你！ 🎉
-            </p>
-          )}
-        </form>
+              <button
+                type="submit"
+                disabled={status === "sending"}
+                className="rounded-full bg-[linear-gradient(135deg,rgba(243,199,107,0.95),rgba(143,211,255,0.95))] px-6 py-3 text-sm font-semibold text-slate-950 transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70"
+              >
+                {status === "sending" ? "提交中..." : "提交联络事项"}
+              </button>
 
-        {/* Additional info */}
-        <div className="mt-12 text-center py-6 border-t border-border">
-          <p className="text-muted-foreground text-sm">
-            也可以直接给我发邮件：{" "}
-            <a href="mailto:xiaozeng@example.com" className="text-accent hover:underline">
-              xiaozeng@example.com
-            </a>
-          </p>
-        </div>
+              {feedback && (
+                <p className={`text-sm leading-7 ${status === "error" ? "text-amber-200" : "text-accent-green"}`}>
+                  {feedback}
+                </p>
+              )}
+            </form>
+          </article>
+        </section>
       </div>
     </div>
   );
